@@ -21,4 +21,6 @@ const thoughtSchema = mongoose.Schema({
     // reactions: { ARRAY OF NESTED DOCUMENTS CREATED W reactionSchema }
 });
 
+//TODO: Create a virtual called reactionCount that retrieves the length fo the thought's reactions array field on query
+
 module.exports;
