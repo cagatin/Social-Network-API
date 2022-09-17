@@ -21,4 +21,4 @@ const userSchema = mongoose.Schema({
 
 // TODO: Create virtual called friendCount that retrieves the length of the user's friends array field on query
 
-module.exports;
+module.exports = userSchema;

@@ -23,4 +23,4 @@ const thoughtSchema = mongoose.Schema({
 
 //TODO: Create a virtual called reactionCount that retrieves the length fo the thought's reactions array field on query
 
-module.exports;
+module.exports = thoughtSchema;
