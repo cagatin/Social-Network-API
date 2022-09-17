@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { dateFormatter } = require('../utils/helpers');
 
 //This will NOT be a model, but rather, be used as the reaction fields subdocument schema in the THOUGHT model
 
@@ -10,7 +11,7 @@ const reactionSchema = mongoose.Schema({
     reactionBody: {
         type: String,
         required: true,
-        // TODO: 280 CHARACTER MAXIMUM
+        max: 280
     },
     username: {
         type: String,
@@ -19,6 +20,6 @@ const reactionSchema = mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now,
-        // TODO: Create a getter method to format timestamp on query
+        get: dateFormatter
     }
 });
