@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { dateFormatter } = require('../utils/helpers');
 
 // defining the Thought Schema
 const thoughtSchema = mongoose.Schema(
@@ -12,7 +13,7 @@ const thoughtSchema = mongoose.Schema(
         createdAt: {
             type: Date,
             default: Date.now,
-            // TODO: USE A GETTER METHOD TO FORMAT TIMESTAMP ON QUERY
+            get: dateFormatter
         },
         // USERNAME THAT CREATED THIS THOUGHT
         username: {
