@@ -22,5 +22,3 @@ const reactionSchema = mongoose.Schema({
         // TODO: Create a getter method to format timestamp on query
     }
 });
-
-module.exports = reactionSchema;
