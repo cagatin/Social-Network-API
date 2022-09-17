@@ -5,7 +5,8 @@ const thoughtSchema = mongoose.Schema({
     thoughtText: {
         type: String,
         required: true,
-        // TODO: MUST BE 1-280 CHARACTERS
+        min: 1,
+        max: 280
     },
     createdAt: {
         type: Date,
