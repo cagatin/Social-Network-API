@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Thought = require('./Thought');
+const { emailValidation } = require('../utils/helpers');
 
 // defining the User Schema
 const userSchema = mongoose.Schema(
@@ -13,8 +13,9 @@ const userSchema = mongoose.Schema(
         email: {
             type: String,
             required: true,
-            unique: true
-            // TODO: ADD EMAIL VALIDATION HERE
+            unique: true,
+            validate: [emailValidation, "Please enter a valid Email!"]
+
         },
         // thoughts: array of _id values referencing the Thought model
         thoughts: [{
