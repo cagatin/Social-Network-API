@@ -18,14 +18,18 @@ const thoughtSchema = mongoose.Schema({
         required: true
     },
     reactions: [{
-        type: mongoose.Schema.Types.ObjectId;
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Reaction'
     }]
 });
 
-//TODO: Create a virtual called reactionCount that retrieves the length fo the thought's reactions array field on query
+//reactionCount virtual that retrieves the length of the thought's reactions array field on query
+thoughtSchema
+    .virtual('reactionCount')
+    //getter
+    .get(() => this.reactions.length);
 
 // Intitialize the Thought Model
-const Thought = model('Thought', thoughtSchema);
+const Thought = mongoose.model('Thought', thoughtSchema);
 
 module.exports = Thought;
