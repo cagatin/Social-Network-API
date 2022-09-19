@@ -45,3 +45,26 @@ const getSingleUser = async function (req, res) {
         res.status(500).json(err);
     }
 }
+
+// Create a new User
+const createUser = async function (req, res) {
+    try {
+        // Create a new user
+        /*  data from req.body should look like so:
+            {
+                "username": "lernantino",
+                "email": "lernantino@gmail.com"
+            }
+        */
+        const newUserData = await User.create(req.body);
+        // In the event that creation failed (username/email is NOT unique, return error).
+        if (!newUserData) {
+            res.status(404).json({ message: "Error in creating new user!" });
+        }
+        // Otherwise, return the newly created user.
+        res.status(200).json(newUserData);
+    }
+    catch (err) {
+        res.status(500).json(err);
+    }
+}
