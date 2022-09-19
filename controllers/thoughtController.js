@@ -110,7 +110,7 @@ const deleteThought = async function (req, res) {
 const createReaction = async function (req, res) {
     try {
         // Find the Thought with associated thoughtId
-        const thoughtData = Thought.findByIdAndUpdate(
+        const thoughtData = await Thought.findByIdAndUpdate(
             { _id: req.params.thoughtId },
             { $addToSet: { reactions: req.body } },
             { new: true }
@@ -132,7 +132,7 @@ const createReaction = async function (req, res) {
 const deleteReaction = async function (req, res) {
     try {
         // Find the Thought associated with the thoughtID
-        const thoughtData = Thought.findOneAndUpdate(
+        const thoughtData = await Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
             { $pull: { reactions: { responseId: req.params.responseId } } },
             { new: true }
