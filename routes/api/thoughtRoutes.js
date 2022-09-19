@@ -9,7 +9,7 @@ const {
     deleteReaction
 } = require('../../controllers/thoughtController');
 
-// api/thought/
+// api/thoughts/
 router.route('/')
     .get(getThoughts)
     .get(getSingleThought)
