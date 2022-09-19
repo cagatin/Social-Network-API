@@ -1,5 +1,6 @@
 const express = require('express');
 const db = require('./config/connection');
+const routes = require('./routes')
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -7,6 +8,9 @@ const app = express();
 // Middlewear
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// Routes
+app.use(routes);
 
 // Start the server and open the connection
 db.once('open', () => {
