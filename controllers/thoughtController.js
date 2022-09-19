@@ -69,7 +69,7 @@ const createThought = async function (req, res) {
     }
 }
 
-// Function to update a Thought based on passed in route parameter _id
+// Function to UPDATE a Thought based on passed in route parameter _id
 const updateThought = async function (req, res) {
     try {
         const thoughtData = await Thought.findOneAndUpdate(
@@ -88,9 +88,27 @@ const updateThought = async function (req, res) {
     }
 }
 
+// Function to DELETE based on the ID value of the route parameter
+const deleteThought = async function (req, res) {
+    try {
+        // Delete the Thought based on the ID of the route parameter
+        const thoughtData = await Thought.findByIdAndDelete(req.params.id);
+        // If the deletion was unsucessful (ID not found), throw an error 404.
+        if (!thoughtData) {
+            res.status(404).json({ message: "Could not delete thought. Please supply a valid ID" });
+        }
+        // Otherwise, send a success message.
+        res.status(200).json({ message: "Thought sucessfully deleted!" });
+    }
+    catch (err) {
+        res.status(500).json(err);
+    }
+}
+
 module.exports = {
     getThoughts,
     getSingleThought,
     createThought,
-    updateThought
+    updateThought,
+    deleteThought
 }
