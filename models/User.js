@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { emailValidation } = require('../utils/helpers');
+const emailValidation = require('../utils/emailValidation');
 
 // defining the User Schema
 const userSchema = mongoose.Schema(

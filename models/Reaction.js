@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { dateFormatter } = require('../utils/helpers');
+const dateFormatter = require('../utils/dateFormatter');
 
 //This will NOT be a model, but rather, be used as the reaction fields subdocument schema in the THOUGHT model
 

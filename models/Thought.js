@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { dateFormatter } = require('../utils/helpers');
+const dateFormatter = require('../utils/dateFormatter');
 
 // defining the Thought Schema
 const thoughtSchema = mongoose.Schema(
