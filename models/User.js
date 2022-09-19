@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const emailValidation = require('../utils/emailValidation');
 
 // defining the User Schema
-const userSchema = mongoose.Schema(
+const userSchema = new mongoose.Schema(
     {
         username: {
             type: String,

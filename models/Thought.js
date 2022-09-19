@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const dateFormatter = require('../utils/dateFormatter');
 
 // defining the Thought Schema
-const thoughtSchema = mongoose.Schema(
+const thoughtSchema = new mongoose.Schema(
     {
         thoughtText: {
             type: String,
