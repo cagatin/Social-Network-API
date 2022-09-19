@@ -68,7 +68,7 @@ const createUser = async function (req, res) {
     }
 }
 
-// Function to UPDATE User data
+// Function to UPDATE User data based on a route parameter
 const updateUser = async function (req, res) {
     try {
         // Retrieve the user by the ID of the route parameter
@@ -86,4 +86,29 @@ const updateUser = async function (req, res) {
     catch (err) {
         res.status(500).json(err);
     }
+}
+
+// Function to DELETE a User based on a route parameter
+const deleteUser = async function (req, res) {
+    try {
+        // Look for the user w/ the associated ID value and delete it.
+        const userData = await User.findOneAndDelete({ _id: req.params.id });
+        // Error: Could not delete user
+        if (!userData) {
+            res.status(404).json({ message: "Could not delete User!" });
+        }
+        // Otherwise, return a success message.
+        res.status(200).json({ message: "Sucessfully deleted user." });
+    }
+    catch (err) {
+        res.status(500).json(err);
+    }
+}
+
+module.exports = {
+    getUsers,
+    getSingleUser,
+    createUser,
+    updateUser,
+    deleteUser
 }
