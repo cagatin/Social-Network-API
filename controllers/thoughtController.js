@@ -127,10 +127,34 @@ const createReaction = async function (req, res) {
     }
 }
 
+// Pulls and Removes reaction based on reactionId value
+// Route looks like: /api/thoughts/:thoughtId/reactions/:responseId
+const deleteReaction = async function (req, res) {
+    try {
+        // Find the Thought associated with the thoughtID
+        const thoughtData = Thought.findOneAndUpdate(
+            { _id: req.params.thoughtId },
+            { $pull: { reactions: { responseId: req.params.responseId } } },
+            { new: true }
+        );
+        // No thought / reaction was found!
+        if (!thoughtData) {
+            res.status(404).json({ message: "Could not remove the Reaction! Invalid thoughtId or responseId" });
+        }
+        // Otherwise, return the thought data
+        res.status(200).json(thoughtData);
+    }
+    catch (err) {
+        res.status(500).json(err);
+    }
+}
+
 module.exports = {
     getThoughts,
     getSingleThought,
     createThought,
     updateThought,
-    deleteThought
+    deleteThought,
+    createReaction,
+    deleteReaction
 }
