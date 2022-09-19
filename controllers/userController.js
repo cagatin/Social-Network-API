@@ -31,8 +31,8 @@ const getSingleUser = async function (req, res) {
         // Retrieve single user and populate Thought and Friend data
         let selectedUser = userData
             .select('-__v')
-            .populate('Thought')
-            .populate('User');
+            .populate('thoughts')
+            .populate('friends');
 
         // Error handling. Something went wrong with population.
         if (!selectedUser) {
