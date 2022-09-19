@@ -61,7 +61,9 @@ const createUser = async function (req, res) {
         if (!newUserData) {
             res.status(404).json({ message: "Error in creating new user!" });
         }
-        // Otherwise, return the newly created user.
+        // Otherwise, Save the newly created document in the User Database
+        User.save((err) => console.log(err));
+        // return the newly created user.
         res.status(200).json(newUserData);
     }
     catch (err) {
