@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const reactionSchema = require('./Reaction'); ss
 const dateFormatter = require('../utils/dateFormatter');
 
 // defining the Thought Schema
@@ -20,10 +21,7 @@ const thoughtSchema = new mongoose.Schema(
             type: String,
             required: true
         },
-        reactions: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Reaction'
-        }]
+        reactions: [reactionSchema]
     },
     {
         //include virtuals in our JSON response

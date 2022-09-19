@@ -23,3 +23,5 @@ const reactionSchema = new mongoose.Schema({
         get: dateFormatter
     }
 });
+
+module.exports = reactionSchema;
