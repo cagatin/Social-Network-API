@@ -1,4 +1,5 @@
 const Thought = require('../models/Thought');
+const User = require('../models/User');
 
 // Function to READ all thoughts
 const getThoughts = async function (req, res) {
@@ -16,7 +17,7 @@ const getThoughts = async function (req, res) {
     }
 }
 
-// Funtion to retieve specific thought based on _id route parameter
+// Function to retieve specific thought based on _id route parameter
 const getSingleThought = async function (req, res) {
     try {
         const thoughtData = await Thought.findById({
@@ -34,8 +35,43 @@ const getSingleThought = async function (req, res) {
     }
 }
 
+// Function to create a new Thought.
+// don't forget to push the created thought's _id to the associated user's thoughts array field
+const createThought = async function (req, res) {
+    try {
+        /* example data
+        {
+            "thoughtText": "Here's a cool thought...",
+            "username": "lernantino",
+            "userId": "5edff358a0fcb779aa7b118b"
+        }
+        */
+        // Create the new Thought
+        const thoughtData = await Thought.create(req.body);
+        // In the event that there is an error creating the Thought, return an error.
+        if (!thoughtData) {
+            res.status(404).json({ message: "Could not create Thought!" });
+        }
+        // Update the user data
+        let userData = await User.findOneAndUpdate(
+            { _id: req.body.userId },
+            { $addToSet: { thoughts: thoughtData._id } },
+            { new: true }
+        );
+        // If the user data did not update, return an error.
+        if (!userData) {
+            res.status(404).json({ message: "Could not push new Thought ID into associated user's thought array!" });
+        }
+        // If the all the above is successful, return the newly created thought
+        res.status(200).json(thoughtData);
+    }
+    catch (err) {
+        res.status(500).json(err);
+    }
+}
 
 module.exports = {
     getThoughts,
     getSingleThought,
+    createThought,
 }
