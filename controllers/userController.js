@@ -72,7 +72,16 @@ const createUser = async function (req, res) {
 const updateUser = async function (req, res) {
     try {
         // Retrieve the user by the ID of the route parameter
-        const userData = await User.findOneAndUpdate
+        const userData = await User.findOneAndUpdate(
+            { _id: req.params.id },
+            { username: req.params.username }
+        );
+        // Error: User with the specific ID is not found. Update did not take place.
+        if (!userData) {
+            res.status(404).json({ message: "Error in updating User. Update Failed" });
+        }
+        // Return the updated User Data.
+        res.status(200).json(userData);
     }
     catch (err) {
         res.status(500).json(err);
