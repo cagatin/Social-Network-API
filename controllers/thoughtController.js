@@ -36,7 +36,6 @@ const getSingleThought = async function (req, res) {
 }
 
 // Function to create a new Thought.
-// don't forget to push the created thought's _id to the associated user's thoughts array field
 const createThought = async function (req, res) {
     try {
         /* example data
@@ -52,7 +51,7 @@ const createThought = async function (req, res) {
         if (!thoughtData) {
             res.status(404).json({ message: "Could not create Thought!" });
         }
-        // Update the user data
+        // Push the created thought's _id to the associated user's thoughts array field
         let userData = await User.findOneAndUpdate(
             { _id: req.body.userId },
             { $addToSet: { thoughts: thoughtData._id } },
@@ -70,8 +69,28 @@ const createThought = async function (req, res) {
     }
 }
 
+// Function to update a Thought based on passed in route parameter _id
+const updateThought = async function (req, res) {
+    try {
+        const thoughtData = await Thought.findOneAndUpdate(
+            { _id: req.params.id },
+            { thoughtText: req.body.thoughtText }
+        );
+        // In the event a Thought with the specific ID is not found, return 404 error.
+        if (!thoughtData) {
+            res.status(404).json({ message: "Error in updating Thought. Thought ID could not be found" });
+        }
+        // Return the updated User Data.
+        res.status(200).json(thoughtData);
+    }
+    catch (err) {
+        res.status(500).json(err);
+    }
+}
+
 module.exports = {
     getThoughts,
     getSingleThought,
     createThought,
+    updateThought
 }
