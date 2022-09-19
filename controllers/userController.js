@@ -17,7 +17,7 @@ const getUsers = async function (req, res) {
     }
 }
 
-// Get a single User by _id, along with its populated thought and friend data
+// Get a single User by _id , along with its populated thought and friend data
 const getSingleUser = async function (req, res) {
     try {
         // Find single user based on ID of the route paramater. 
