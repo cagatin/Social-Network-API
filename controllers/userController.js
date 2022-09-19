@@ -30,7 +30,6 @@ const getSingleUser = async function (req, res) {
         }
         // Retrieve single user and populate Thought and Friend data
         let selectedUser = userData
-            .select('-__v')
             .populate('thoughts')
             .populate('friends');
 
@@ -61,10 +60,19 @@ const createUser = async function (req, res) {
         if (!newUserData) {
             res.status(404).json({ message: "Error in creating new user!" });
         }
-        // Otherwise, Save the newly created document in the User Database
-        User.save((err) => console.log(err));
         // return the newly created user.
         res.status(200).json(newUserData);
+    }
+    catch (err) {
+        res.status(500).json(err);
+    }
+}
+
+// Function to UPDATE User data
+const updateUser = async function (req, res) {
+    try {
+        // Retrieve the user by the ID of the route parameter
+        const userData = await User.findOneAndUpdate
     }
     catch (err) {
         res.status(500).json(err);
