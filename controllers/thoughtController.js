@@ -105,6 +105,28 @@ const deleteThought = async function (req, res) {
     }
 }
 
+// Create a reaction stored in the Thought's reactions array field
+// Route looks like: /api/thoughts/:thoughtId/reactions
+const createReaction = async function (req, res) {
+    try {
+        // Find the Thought with associated thoughtId
+        const thoughtData = Thought.findByIdAndUpdate(
+            { _id: req.params.thoughtId },
+            { $addToSet: { reactions: req.body } },
+            { new: true }
+        );
+        // If no such Thought exists, return a 404 error.
+        if (!thoughtData) {
+            res.status(404).json({ message: "No such Thought exists with the route parameter!" });
+        }
+        // Otherwise, return the Thought data with the updated Reaction
+        res.status(200).json(thoughtData);
+    }
+    catch (err) {
+        res.status(500).json(err);
+    }
+}
+
 module.exports = {
     getThoughts,
     getSingleThought,
