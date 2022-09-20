@@ -20,7 +20,7 @@ Once we have installed all necessary dependencies, the application is ready to u
 ## Seeding
 If you would like to test the application, I have provided a seed file which seeds the database with data! To populate the database with dummy data, run the following in your terminal/git bash:
 ```
-npm seed
+npm run seed
 ```
 Once the command is used, the database will now contain dummy data for you to use!
 ## Contribute
