@@ -27,9 +27,9 @@ const generateUsers = function () {
     // Populate the usersData array
     for (let i = 0; i < 10; i++) {
         let testEmail = `testemail${i}@email.com`;
-        let testUsername = generateUsername("", 2, 10);
+        let testUsername = generateUsername("", 3, 10);
         let obj = {
-            userName: testUsername,
+            username: testUsername,
             email: testEmail
         }
         usersData.push(obj);
@@ -39,7 +39,7 @@ const generateUsers = function () {
 
 // Function to create thoughtText-username pairs
 const generateThoughts = function () {
-    for (let i = 0; i < thoughtsData.length; i++) {
+    for (let i = 0; i < thoughtsArr.length; i++) {
         let obj = {
             thoughtText: thoughtsData[i],
             username: Math.floor(Math.random() * usersArr.length)       //retrieve a random username from the usersData array
@@ -47,13 +47,17 @@ const generateThoughts = function () {
         thoughtsData.push(obj);
     }
 }
-
 // If there is an error connecting to MongoDB, log the error.
 db.on('error', (err) => console.log(err));
 
 // Once the connection is open, seed the data
 db.once('open', async () => {
     console.log('---CONNECTION TO MONGODB ESTABLISHED---');
+
+
+    // Populate the arrays
+    generateUsers();
+    generateThoughts();
 
     // Delete any persistent data in the User and Thought models
     await User.deleteMany({});
