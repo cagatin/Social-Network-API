@@ -41,7 +41,7 @@ const generateUsers = function () {
 const generateThoughts = function () {
     for (let i = 0; i < thoughtsArr.length; i++) {
         let obj = {
-            thoughtText: thoughtsData[i],
+            thoughtText: thoughtsArr[i],
             username: Math.floor(Math.random() * usersArr.length)       //retrieve a random username from the usersData array
         }
         thoughtsData.push(obj);
