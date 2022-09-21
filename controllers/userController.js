@@ -71,7 +71,7 @@ const updateUser = async function (req, res) {
     try {
         // Retrieve the user by the ID of the route parameter
         const userData = await User.findOneAndUpdate(
-            { _id: req.params.id },
+            { _id: req.params.userId },
             { username: req.params.username }
         );
         // Error: User with the specific ID is not found. Update did not take place.
@@ -90,7 +90,7 @@ const updateUser = async function (req, res) {
 const deleteUser = async function (req, res) {
     try {
         // Look for the user w/ the associated ID value and delete it.
-        const userData = await User.findOneAndDelete({ _id: req.params.id });
+        const userData = await User.findOneAndDelete({ _id: req.params.userId });
         // Error: Could not delete user
         if (!userData) {
             res.status(404).json({ message: "Could not delete User!" });
