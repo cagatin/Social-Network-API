@@ -71,7 +71,7 @@ const createThought = async function (req, res) {
 const updateThought = async function (req, res) {
     try {
         const thoughtData = await Thought.findOneAndUpdate(
-            { _id: req.params.id },
+            { _id: req.params.thoughtId },
             { thoughtText: req.body.thoughtText }
         );
         // In the event a Thought with the specific ID is not found, return 404 error.
@@ -90,7 +90,7 @@ const updateThought = async function (req, res) {
 const deleteThought = async function (req, res) {
     try {
         // Delete the Thought based on the ID of the route parameter
-        const thoughtData = await Thought.findByIdAndDelete(req.params.id);
+        const thoughtData = await Thought.findByIdAndDelete(req.params.thoughtId);
         // If the deletion was unsucessful (ID not found), throw an error 404.
         if (!thoughtData) {
             res.status(404).json({ message: "Could not delete thought. Please supply a valid ID" });
