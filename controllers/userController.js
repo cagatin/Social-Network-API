@@ -21,9 +21,7 @@ const getUsers = async function (req, res) {
 const getSingleUser = async function (req, res) {
     try {
         // Find single user based on ID of the route paramater. 
-        const userData = await User.findById({
-            _id: req.params.userId
-        });
+        const userData = await User.findById(req.params.userId);
         // If no such user exists, return a 404 error.
         if (!userData) {
             res.status(404).json({ message: "No users found in the database!" });
