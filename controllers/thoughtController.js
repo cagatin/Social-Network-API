@@ -72,7 +72,8 @@ const updateThought = async function (req, res) {
     try {
         const thoughtData = await Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
-            { thoughtText: req.body.thoughtText }
+            { thoughtText: req.body.thoughtText },
+            { new: true }
         );
         // In the event a Thought with the specific ID is not found, return 404 error.
         if (!thoughtData) {
