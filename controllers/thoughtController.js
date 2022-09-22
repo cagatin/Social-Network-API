@@ -20,7 +20,7 @@ const getThoughts = async function (req, res) {
 // Function to retieve specific thought based on _id route parameter
 const getSingleThought = async function (req, res) {
     try {
-        const thoughtData = await Thought.findById(req.params.id);
+        const thoughtData = await Thought.findById(req.params.thoughtId);
         // If no thought matches the ID, return an error
         if (!thoughtData) {
             res.status(404).json({ message: "ID value does not match any Thought data" });
