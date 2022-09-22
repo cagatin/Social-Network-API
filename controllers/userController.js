@@ -21,22 +21,16 @@ const getUsers = async function (req, res) {
 const getSingleUser = async function (req, res) {
     try {
         // Find single user based on ID of the route paramater. 
-        const userData = await User.findById(req.params.userId);
+        const userData = await User
+            .findOne({ _id: req.params.userId })
+            .select('-__v')
+            .populate('thoughts')
+            .populate('friends');
         // If no such user exists, return a 404 error.
         if (!userData) {
             res.status(404).json({ message: "No users found in the database!" });
         }
-        // Retrieve single user and populate Thought and Friend data
-        let selectedUser = userData
-            .populate('thoughts')
-            .populate('friends');
-
-        // Error handling. Something went wrong with population.
-        if (!selectedUser) {
-            res.status(404).json({ message: "Error in populating selected user data!" });
-        }
-        // Otherwise, return the selected user
-        res.status(200).json(selectedUser);
+        res.status(200).json(userData);
     }
     catch (err) {
         res.status(500).json(err);

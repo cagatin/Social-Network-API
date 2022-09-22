@@ -32,14 +32,15 @@ const userSchema = new mongoose.Schema(
         //include virtruals in our JSON response
         toJson: {
             virtuals: true
-        }
+        },
+        id: false,
     }
 );
 
 // friendCount virtual that retrieves the length of the user's friends array field on query
 userSchema
     .virtual('friendCount')
-    .get(() => friends.length);
+    .get(() => this.friends.length);
 
 // Initialize User Model
 const User = mongoose.model('User', userSchema);
