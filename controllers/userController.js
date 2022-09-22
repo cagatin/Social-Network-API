@@ -26,6 +26,7 @@ const getSingleUser = async function (req, res) {
             .select('-__v')
             .populate('thoughts')
             .populate('friends');
+        
         // If no such user exists, return a 404 error.
         if (!userData) {
             res.status(404).json({ message: "No users found in the database!" });
