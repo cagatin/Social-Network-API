@@ -31,7 +31,8 @@ const userSchema = new mongoose.Schema(
     {
         //include virtruals in our JSON response
         toJson: {
-            virtuals: true
+            virtuals: true,
+            getters: true
         },
         id: false,
     }

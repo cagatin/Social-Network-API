@@ -26,7 +26,8 @@ const thoughtSchema = new mongoose.Schema(
     {
         //include virtuals in our JSON response
         toJson: {
-            virtuals: true
+            virtuals: true,
+            getters: true
         }
     }
 );
