@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const reactionSchema = require('./Reaction');
-const dateFormatter = require('../utils/dateFormatter');
+const moment = require('moment');
 
 // defining the Thought Schema
 const thoughtSchema = new mongoose.Schema(
@@ -14,7 +14,7 @@ const thoughtSchema = new mongoose.Schema(
         createdAt: {
             type: Date,
             default: Date.now,
-            get: dateFormatter
+            get: (date) => moment(date).format('YYYY-MM-DD')
         },
         // USERNAME THAT CREATED THIS THOUGHT
         username: {
