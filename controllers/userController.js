@@ -26,7 +26,7 @@ const getSingleUser = async function (req, res) {
             .select('-__v')
             .populate('thoughts')
             .populate('friends');
-        
+
         // If no such user exists, return a 404 error.
         if (!userData) {
             res.status(404).json({ message: "No users found in the database!" });
@@ -67,7 +67,7 @@ const updateUser = async function (req, res) {
         // Retrieve the user by the ID of the route parameter
         const userData = await User.findOneAndUpdate(
             { _id: req.params.userId },
-            { username: req.params.username },
+            { username: req.body.username },
             { new: true }
         );
         // Error: User with the specific ID is not found. Update did not take place.
