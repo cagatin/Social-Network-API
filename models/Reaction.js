@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const dateFormatter = require('../utils/dateFormatter');
+const moment = require('moment');
 
 //This will NOT be a model, but rather, be used as the reaction fields subdocument schema in the THOUGHT model
 
@@ -20,7 +20,7 @@ const reactionSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now,
-        get: dateFormatter
+        get: (date) => moment(date).format('YYYY-MM-DD')
     }
 });
 
