@@ -19,10 +19,17 @@ npm install
 ```
 Once we have installed all necessary dependencies, the application is ready to use! <br>
 
-If you have ```nodemon``` install, feel free to run the application by using ```npm start```. Otherwise, simply use the ```node server.js``` command to start the application! <br>
+If you have ```nodemon``` install, feel free to run the application by using:
+```
+npm start
+```
+Otherwise, simply use the following command to begin the application!
+```
+node server.js
+``` 
 ## Demonstration
-[Click Here for Part 1 of my Demonstration Video!](https://watch.screencastify.com/v/AI90Ki4acH5PIZumKJpu) <br>
-[Click Here for Part 2 of my Demonstration Video!](https://watch.screencastify.com/v/VFNpnQ3DtKMM4ZwRFWTp)<br>
+[Click Here for PART 1 of my Demonstration Video!](https://watch.screencastify.com/v/AI90Ki4acH5PIZumKJpu) <br>
+[Click Here for PART 2 of my Demonstration Video!](https://watch.screencastify.com/v/VFNpnQ3DtKMM4ZwRFWTp)<br>
 ## Contribute
 To contribute to this project, Please create a Pull Request containing your changes! <br/>
 
