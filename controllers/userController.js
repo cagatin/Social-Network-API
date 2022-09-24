@@ -122,6 +122,7 @@ const addFriend = async function (req, res) {
 }
 
 // Function to delete a friend
+///api/users/:userId/friends/:friendId
 const deleteFriend = async function (req, res) {
     try {
         if (req.params.userId === req.params.friendId) {
@@ -147,5 +148,7 @@ module.exports = {
     getSingleUser,
     createUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    addFriend,
+    deleteFriend
 }
