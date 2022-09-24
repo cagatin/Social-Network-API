@@ -123,7 +123,7 @@ const addFriend = async function (req, res) {
 
 // Function to delete a friend
 ///api/users/:userId/friends/:friendId
-const deleteFriend = async function (req, res) {
+const removeFriend = async function (req, res) {
     try {
         if (req.params.userId === req.params.friendId) {
             req.status(404).json({ message: 'Error: Cannot Delete Self from Friends List' });
@@ -150,5 +150,5 @@ module.exports = {
     updateUser,
     deleteUser,
     addFriend,
-    deleteFriend
+    removeFriend
 }
