@@ -127,13 +127,13 @@ const createReaction = async function (req, res) {
 }
 
 // Pulls and Removes reaction based on reactionId value
-// Route looks like: /api/thoughts/:thoughtId/reactions/:reactionId
+// Route looks like: /api/thoughts/:thoughtId/reactions/
 const deleteReaction = async function (req, res) {
     try {
         // Find the Thought associated with the thoughtID
         const thoughtData = await Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
-            { $pull: { reactions: { responseId: req.params.reactionId } } },
+            { $pull: { reactions: { _id: req.body.reactionId } } },
             { new: true }
         );
         // No thought / reaction was found!

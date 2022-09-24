@@ -21,9 +21,8 @@ router.route('/:thoughtId')
     .delete(deleteThought);
 
 // api/thoughts/:thoughtId/reactions
-router.route('/:thoughtId/reactions').post(createReaction);
-
-// api/thoughts/:thoughtId/reactions/:reactionsId
-router.route(':thoughtId/reactions/:reactionId').delete(deleteReaction);
+router.route('/:thoughtId/reactions')
+    .post(createReaction)
+    .delete(deleteReaction);
 
 module.exports = router;
