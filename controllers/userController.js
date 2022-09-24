@@ -99,6 +99,28 @@ const deleteUser = async function (req, res) {
     }
 }
 
+// Function to add a friend
+///api/users/:userId/friends/:friendId
+const addFriend = async function (req, res) {
+    try {
+        if (req.params.userId === req.params.friendId) {
+            req.status(404).json({ message: 'Error: Cannot Add Yourself as a Friend' });
+        }
+        const userData = await User.findOneAndUpdate(
+            { _id: req.params.userId },
+            { $addToSet: { friends: req.params.friendId } },
+            { new: true }
+        );
+        if (!userData) {
+            res.status(404).json({ message: "Unable to add friend" });
+        }
+        res.status(200).json(userData);
+    }
+    catch (err) {
+        res.status(500).json(err);
+    }
+}
+
 module.exports = {
     getUsers,
     getSingleUser,
