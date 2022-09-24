@@ -121,6 +121,27 @@ const addFriend = async function (req, res) {
     }
 }
 
+// Function to delete a friend
+const deleteFriend = async function (req, res) {
+    try {
+        if (req.params.userId === req.params.friendId) {
+            req.status(404).json({ message: 'Error: Cannot Delete Self from Friends List' });
+        }
+        const userData = await User.findOneAndUpdate(
+            { _id: req.params.userId },
+            { $pull: { friends: req.params.friendId } },
+            { new: true }
+        );
+        if (!userData) {
+            res.status(404).json({ message: "Unable to delete friend" });
+        }
+        res.status(200).json(userData);
+    }
+    catch (err) {
+        res.status(500).json(err);
+    }
+}
+
 module.exports = {
     getUsers,
     getSingleUser,
